@@ -66,6 +66,26 @@ function d7compatible_preprocess_node(&$variables) {
 }
 
 /**
+ * Prepares variables for node templates.
+ *
+ * @see comment.tpl.php and derivatives.
+ */
+function d7compatible_preprocess_comment(&$variables) {
+  // Restore classes to strings.
+  $variables['classes'] = implode(' ', $variables['classes']);
+
+  // Restore attributes to strings.
+  d7compatible_attributes_convert($variables['attributes']);
+  d7compatible_attributes_convert($variables['content_attributes']);
+
+  // Create D7 title attributes from B title classes.
+  $attributes = array(
+    'class' => $variables['title_classes'],
+  );
+  $variables['title_attributes'] = backdrop_attributes($attributes);
+}
+
+/**
  * Prepare vairables for block templates.
  *
  * @see block.tpl.php and derivatives.
