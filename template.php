@@ -49,9 +49,15 @@ function d7compatible_preprocess_node(&$variables) {
   $variables['classes'] = implode(' ', $variables['classes']);
 
   // Restore attributes to strings.
-  d7compatible_attributes_convert($variables['attributes']);
-  //d7compatible_attributes_convert($variables['title_attributes']);
-  d7compatible_attributes_convert($variables['content_attributes']);
+  if (isset($variables['attributes'])) {
+    d7compatible_attributes_convert($variables['attributes']);
+  }
+  if (isset($variables['title_attributes'])) {
+    d7compatible_attributes_convert($variables['title_attributes']);
+  }
+  if ($variables['content_attributes']) {
+    d7compatible_attributes_convert($variables['content_attributes']);
+  }
 
   // Add more template suggestions based on view mode.
   if (!in_array($variables['view_mode'], array('full', 'teaser'))) {
@@ -75,8 +81,12 @@ function d7compatible_preprocess_comment(&$variables) {
   $variables['classes'] = implode(' ', $variables['classes']);
 
   // Restore attributes to strings.
-  d7compatible_attributes_convert($variables['attributes']);
-  d7compatible_attributes_convert($variables['content_attributes']);
+  if (isset($variables['attributes'])) {
+    d7compatible_attributes_convert($variables['attributes']);
+  }
+  if ($variables['content_attributes']) {
+    d7compatible_attributes_convert($variables['content_attributes']);
+  }
 
   // Create D7 title attributes from B title classes.
   $attributes = array(
@@ -114,9 +124,15 @@ function d7compatible_preprocess_block(&$variables) {
   $variables['classes'] = implode(' ', $variables['classes']);
 
   // Restore attributes to strings.
-  d7compatible_attributes_convert($variables['attributes']);
-  d7compatible_attributes_convert($variables['title_attributes']);
-  d7compatible_attributes_convert($variables['content_attributes']);
+  if (isset($variables['attributes'])) {
+    d7compatible_attributes_convert($variables['attributes']);
+  }
+  if (isset($variables['title_attributes'])) {
+    d7compatible_attributes_convert($variables['title_attributes']);
+  }
+  if ($variables['content_attributes']) {
+    d7compatible_attributes_convert($variables['content_attributes']);
+  }
 }
 
 /**
@@ -129,9 +145,15 @@ function d7compatible_preprocess_field(&$variables) {
   $variables['classes'] = implode(' ', $variables['classes']);
 
   // Restore attributes to strings.
-  d7compatible_attributes_convert($variables['attributes']);
-  d7compatible_attributes_convert($variables['title_attributes']);
-  d7compatible_attributes_convert($variables['content_attributes']);
+  if (isset($variables['attributes'])) {
+    d7compatible_attributes_convert($variables['attributes']);
+  }
+  if (isset($variables['title_attributes'])) {
+    d7compatible_attributes_convert($variables['title_attributes']);
+  }
+  if ($variables['content_attributes']) {
+    d7compatible_attributes_convert($variables['content_attributes']);
+  }
 
   // Restore field item attributes to strings.
   foreach ($variables['item_attributes'] as $delta => $item_attributes) {

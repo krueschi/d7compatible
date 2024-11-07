@@ -97,8 +97,7 @@
 
   <div class="content"<?php print $content_attributes; ?>>
     <?php
-      // We hide the comments and links now so that we can render them later.
-      hide($content['comments']);
+      // We hide the links now so that we can render them separately.
       hide($content['links']);
       print render($content);
     ?>
@@ -106,6 +105,25 @@
 
   <?php print render($content['links']); ?>
 
-  <?php print render($content['comments']); ?>
+  <!-- add the comments-wrapper template from D7 into node template here -->
+  <?php if ($comments): ?>
+
+    <div id="comments" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+      <?php if ($comments['comments'] && $node->type != 'forum'): ?>
+        <?php print render($title_prefix); ?>
+        <h2 class="title"><?php print t('Comments'); ?></h2>
+        <?php print render($title_suffix); ?>
+      <?php endif; ?>
+
+      <?php print render($comments['comments']); ?>
+
+      <?php if ($comments['comment_form']): ?>
+        <h2 class="title comment-form"><?php print t('Add new comment'); ?></h2>
+        <?php print render($comments['comment_form']); ?>
+      <?php endif; ?>
+    </div>
+
+  <?php endif; ?>
+  <!-- add the comments-wrapper template from D7 into node template here -->
 
 </div>
